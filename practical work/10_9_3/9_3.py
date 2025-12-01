@@ -11,7 +11,6 @@ def rayleigh_equation_numba(y0, mu, t_k, h):
     n_steps = int(t_k // h) + 1
     y_values = np.zeros((n_steps, 2))
     y_values[0] = y0
-    
     for i in range(1, n_steps):
         y = y_values[i-1]
         k1 = rayleigh_function(y, mu)
