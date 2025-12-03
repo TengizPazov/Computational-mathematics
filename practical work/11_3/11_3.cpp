@@ -13,7 +13,7 @@ std::vector<double> shooting_system(double x, const std::vector<double>& z) {
         sqrt_y = 0;
         dsqrt_dy = 0;
     } else {
-        sqrt_y = std::sqrt(y);
+        sqrt_y = std::sqrt(y);                                              
         if (y > 1e-12) {
             dsqrt_dy = 1.0 / (2.0 * sqrt_y);
         } else {

@@ -57,7 +57,7 @@ pair<vector<double>, vector<double>> solve_bvp() {
     // Параметры
     double a_boundary = 0.0;
     double b_boundary = M_PI;
-    int N = 30;
+    int N = 300;
     double h = (b_boundary - a_boundary) / (N + 1);
     
     cout << fixed << setprecision(4);
