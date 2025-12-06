@@ -59,7 +59,7 @@ def solve_bvp():
     yN = 9.6
 
     x_internal = x[1:-1]
-   
+    
     a_coeff = np.ones(N)
     b_coeff = -2 - h * g(x_internal) + h**2 * h_func(x_internal)
     c_coeff = np.ones(N) * (1 + h * g(x_internal))
@@ -82,7 +82,6 @@ def print_solution_at_target_points(x, y, target_points):
     print("\n" + "="*50)
     print("Решение в целевых точках:")
     print("="*50)
-    
     for point in target_points:
         idx = np.argmin(np.abs(x - point))
         print(f"x = {point:4.1f} | y = {y[idx]:12.6f} | (точка сетки: {x[idx]:6.4f})")
