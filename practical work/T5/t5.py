@@ -193,8 +193,8 @@ def main():
     )
     
     # Параметры интегрирования
-    end_time = 5 * T
-    initial_step = 1e-3
+    end_time = 6 * T
+    initial_step = 1e-6
     eps = 1e-14
     
     print(f"Параметры:")

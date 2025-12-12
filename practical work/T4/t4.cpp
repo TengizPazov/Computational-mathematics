@@ -126,7 +126,7 @@ int main() {
     double x_start = 2.718;
     double x_end = 7.389;
     double h = 0.001;
-    
+
     double r0 = 1e-6;
     double a0 = 1.0;
     std::vector<double> y0 = {E, a0};

@@ -31,7 +31,7 @@ def f(x, y):
 x0 = 0.0
 y0 = -2.0
 x_end = 100.0
-h = 0.1
+h = 0.3
 
 x_arr, y_arr = adams_bashforth_2(f, y0, x0, x_end, h)
 
