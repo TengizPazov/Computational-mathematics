@@ -1,172 +1,238 @@
-# Upwind and Lax–Wendroff Schemes with GIF Visualization
+📘 Upwind and Lax–Wendroff Schemes with GIF Visualization
+This repository contains an implementation of two finite‑difference schemes for the one‑dimensional linear advection equation:
 
-This repository contains an implementation of two finite‑difference schemes for the one‑dimensional linear advection equation
+𝑢
+𝑡
++
+𝑎
+𝑢
+𝑥
+=
+0
+,
+𝑎
+=
+1
+,
+with periodic boundary conditions.
+The numerical solution is computed in C++ and visualized as GIF animations using Python.
 
+Implemented schemes:
 
+Upwind (first‑order)
 
-\[
-u_t + a u_x = 0,\qquad a = 1,
-\]
+Lax–Wendroff (second‑order)
 
+Simulations are performed for Courant numbers:
 
-
-with periodic boundary conditions. The numerical solution is computed in C++ and visualized as GIF animations using Python.  
-The schemes implemented:
-
-- Upwind (first‑order)
-- Lax–Wendroff (second‑order)
-
-Simulations are performed for Courant numbers
-
-
-
-\[
-\frac{\tau}{h} = 1.0,\; 0.6,\; 0.3.
-\]
-
-
-
----
-
-## Repository Structure
-
+𝜏
+ℎ
+=
+1.0
+,
+  
+0.6
+,
+  
+0.3.
+📁 Repository Structure
+Код
 T1/
-│
-├── solver.cpp
-│   C++ implementation of both numerical schemes.
-│
-├── solver
-│   Compiled executable produced from solver.cpp.
-│
-├── graph.py
-│   Python script that runs the solver, reads streamed output,
-│   and generates GIF animations without intermediate files.
-│
+├── solver.cpp              # C++ implementation of both numerical schemes
+├── solver                  # Compiled executable
+├── graph.py                # Python script that runs solver and generates GIFs
 ├── upwind_CFL0.3.gif
 ├── upwind_CFL0.6.gif
 ├── upwind_CFL1.0.gif
-│   GIF animations for the Upwind scheme.
-│
 ├── laxwendroff_CFL0.3.gif
 ├── laxwendroff_CFL0.6.gif
 └── laxwendroff_CFL1.0.gif
-GIF animations for the Lax–Wendroff scheme.
+🎞 GIF Animations
+Upwind Scheme
+CFL = 1.0
+[Похоже, результат оказался небезопасным для отображения. Давайте внесем изменения и попробуем что-нибудь другое!]
 
+CFL = 0.6
+[Похоже, результат оказался небезопасным для отображения. Давайте внесем изменения и попробуем что-нибудь другое!]
 
----
+CFL = 0.3
+[Похоже, результат оказался небезопасным для отображения. Давайте внесем изменения и попробуем что-нибудь другое!]
 
-## GIF Animations
+Lax–Wendroff Scheme
+CFL = 1.0
+[Похоже, результат оказался небезопасным для отображения. Давайте внесем изменения и попробуем что-нибудь другое!]
 
-### Upwind Scheme
+CFL = 0.6
+[Похоже, результат оказался небезопасным для отображения. Давайте внесем изменения и попробуем что-нибудь другое!]
 
-**CFL = 1.0**  
-![Upwind CFL 1.0](upwind_CFL1.0.gif)
+CFL = 0.3
+[Похоже, результат оказался небезопасным для отображения. Давайте внесем изменения и попробуем что-нибудь другое!]
 
-**CFL = 0.6**  
-![Upwind CFL 0.6](upwind_CFL0.6.gif)
-
-**CFL = 0.3**  
-![Upwind CFL 0.3](upwind_CFL0.3.gif)
-
----
-
-### Lax–Wendroff Scheme
-
-**CFL = 1.0**  
-![Lax–Wendroff CFL 1.0](laxwendroff_CFL1.0.gif)
-
-**CFL = 0.6**  
-![Lax–Wendroff CFL 0.6](laxwendroff_CFL0.6.gif)
-
-**CFL = 0.3**  
-![Lax–Wendroff CFL 0.3](laxwendroff_CFL0.3.gif)
-
----
-
-## Numerical Method Overview
-
-### Grid
+📐 Numerical Method Overview
+Grid
 Uniform spatial grid:
 
-
-\[
-x_i = ih,\quad i=0,\dots,N.
-\]
-
-
-
+𝑥
+𝑖
+=
+𝑖
+ℎ
+,
+𝑖
+=
+0
+,
+…
+,
+𝑁
+.
 Initial condition:
 
-
-\[
-u(x,0) = \sin\left(\frac{4\pi x}{L}\right).
-\]
-
-
-
+𝑢
+(
+𝑥
+,
+0
+)
+=
+sin
+⁡
+(
+4
+𝜋
+𝑥
+𝐿
+)
+.
 Periodic boundary conditions:
 
+𝑢
+(
+0
+,
+𝑡
+)
+=
+𝑢
+(
+𝐿
+,
+𝑡
+)
+.
+🔸 Upwind Scheme
+𝑢
+𝑖
+𝑛
++
+1
+=
+𝑢
+𝑖
+𝑛
+−
+𝜆
+(
+𝑢
+𝑖
+𝑛
+−
+𝑢
+𝑖
+−
+1
+𝑛
+)
+.
+First‑order accurate
 
-\[
-u(0,t) = u(L,t).
-\]
+Introduces numerical diffusion for 
+𝜆
+<
+1
 
+🔸 Lax–Wendroff Scheme
+𝑢
+𝑖
+𝑛
++
+1
+=
+𝑢
+𝑖
+𝑛
+−
+𝜆
+2
+(
+𝑢
+𝑖
++
+1
+𝑛
+−
+𝑢
+𝑖
+−
+1
+𝑛
+)
++
+𝜆
+2
+2
+(
+𝑢
+𝑖
++
+1
+𝑛
+−
+2
+𝑢
+𝑖
+𝑛
++
+𝑢
+𝑖
+−
+1
+𝑛
+)
+.
+Second‑order accurate
 
+Dispersive for small CFL
 
-### Upwind Scheme
-
-
-\[
-u_i^{n+1} = u_i^n - \lambda (u_i^n - u_{i-1}^n).
-\]
-
-
-
-First‑order accurate.  
-Introduces numerical diffusion for \(\lambda < 1\).
-
-### Lax–Wendroff Scheme
-
-
-\[
-u_i^{n+1} = u_i^n
-- \frac{\lambda}{2}(u_{i+1}^n - u_{i-1}^n)
-+ \frac{\lambda^2}{2}(u_{i+1}^n - 2u_i^n + u_{i-1}^n).
-\]
-
-
-
-Second‑order accurate.  
-Dispersive for small CFL.
-
----
-
-## Execution Pipeline
-
-### 1. Compile the solver
-```bash
+🚀 Execution Pipeline
+1. Compile the solver
+bash
 g++ solver.cpp -o solver -O3 -std=c++17
-
 2. Generate GIF animations
-
+bash
 python3 graph.py
 The Python script:
 
-runs the solver as a subprocess,
+runs the solver as a subprocess
 
-reads solution frames from standard output,
+reads solution frames from standard output
 
-converts them into images in memory,
+converts them into images in memory
 
-assembles them into GIF files.
+assembles them into GIF files
 
-No intermediate text or image files are created.
-Resulting Files
-After running graph.py, the following GIFs appear in the directory:
+No intermediate files are created.
+
+📦 Resulting Files
+After running graph.py, the following GIFs appear:
+
 upwind_CFL0.3.gif
+
 upwind_CFL0.6.gif
+
 upwind_CFL1.0.gif
+
 laxwendroff_CFL0.3.gif
+
 laxwendroff_CFL0.6.gif
-laxwendroff_CFL1.0.gif
 
