@@ -5,10 +5,12 @@
 
 using namespace std;
 
+//решение аналитическое
 double exact(double x, double t, double L, double a) {
     return sin(4.0 * M_PI * (x - a * t) / L);
 }
 
+//инициализация начальных условий -- заполняем массив
 void init(vector<double>& y, double L, double h) {
     for (int i = 0; i < y.size(); ++i) {
         double x = i * h;
@@ -16,31 +18,32 @@ void init(vector<double>& y, double L, double h) {
     }
 }
 
-void step_upwind(vector<double>& y, double lambda) {
+//уголок
+void step_upwind(vector<double>& y, double sigma) {
     int N = y.size();
     vector<double> yn = y;
     for (int i = 1; i < N; ++i)
-        y[i] = yn[i] - lambda * (yn[i] - yn[i - 1]);
+        y[i] = yn[i] - sigma * (yn[i] - yn[i - 1]);
     y[0] = y[N - 1];
 }
 
-void step_lw(vector<double>& y, double lambda) {
+void step_lw(vector<double>& y, double sigma) {
     int N = y.size();
     vector<double> yn = y;
 
     for (int i = 1; i < N - 1; ++i) {
         y[i] = yn[i]
-             - 0.5 * lambda * (yn[i + 1] - yn[i - 1])
-             + 0.5 * lambda * lambda * (yn[i + 1] - 2*y[i] + yn[i - 1]);
+             - 0.5 * sigma * (yn[i + 1] - yn[i - 1])
+             + 0.5 * sigma * sigma * (yn[i + 1] - 2*y[i] + yn[i - 1]);
     }
 
     y[0] = yn[0]
-         - 0.5 * lambda * (yn[1] - yn[N - 1])
-         + 0.5 * lambda * lambda * (yn[1] - 2*yn[0] + yn[N - 1]);
+         - 0.5 * sigma * (yn[1] - yn[N - 1])
+         + 0.5 * sigma * sigma * (yn[1] - 2*yn[0] + yn[N - 1]);
 
     y[N - 1] = yn[N - 1]
-             - 0.5 * lambda * (yn[0] - yn[N - 2])
-             + 0.5 * lambda * lambda * (yn[0] - 2*yn[N - 1] + yn[N - 2]);
+             - 0.5 * sigma * (yn[0] - yn[N - 2])
+             + 0.5 * sigma * sigma * (yn[0] - 2*yn[N - 1] + yn[N - 2]);
 }
 
 void output_frame(const vector<double>& y, double h, double t) {
@@ -88,9 +91,9 @@ void run_scheme(const string& name,
 }
 
 int main() {
-    double L = 20, T = 18, a = 1, h = 0.5;
+    double L = 20, T = 50, a = 1, h = 0.5;
 
-    vector<double> CFLs = {1.0, 0.6, 0.3};
+    vector<double> CFLs = {0.6, 1.0, 1.01};
 
     for (double CFL : CFLs) {
         run_scheme("upwind", step_upwind, L, T, a, h, CFL);

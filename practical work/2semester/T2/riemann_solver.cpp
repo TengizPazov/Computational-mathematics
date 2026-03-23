@@ -102,9 +102,9 @@ struct EigenData {
 
 EigenData compute_eigen(double u, double c) {
     EigenData ed;
-    ed.lam[0] = u - c;
+    ed.lam[0] = u + c;
     ed.lam[1] = u;
-    ed.lam[2] = u + c;
+    ed.lam[2] = u - c;
     for(int k=0;k<3;k++) ed.abs_lam[k] = std::abs(ed.lam[k]);
     return ed;
 }
