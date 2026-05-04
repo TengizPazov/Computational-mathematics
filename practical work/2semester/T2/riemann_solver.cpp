@@ -142,7 +142,7 @@ int main() {
     // Начальные условия
     for(int i = 0; i < NX; i++) {
         if(x[i] < 0.0) {
-            rho[i] = rho_L;
+            rho[i] = rho_L;   
             u[i]   = u_L;
             P[i]   = P_L;
         } else {
