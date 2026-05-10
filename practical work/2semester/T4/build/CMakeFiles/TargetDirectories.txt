@@ -1,0 +1,3 @@
+/home/tengiz/Documents/Computational-mathematics/practical work/2semester/T4/build/CMakeFiles/heat2d.dir
+/home/tengiz/Documents/Computational-mathematics/practical work/2semester/T4/build/CMakeFiles/edit_cache.dir
+/home/tengiz/Documents/Computational-mathematics/practical work/2semester/T4/build/CMakeFiles/rebuild_cache.dir
