@@ -6,9 +6,6 @@
 #include <stdexcept>
 #include <cmath>
 
-// ─────────────────────────────────────────────
-//  Dense vector
-// ─────────────────────────────────────────────
 template<typename T>
 class Vector {
 public:
@@ -19,9 +16,6 @@ public:
     std::size_t size() const { return data.size(); }
 };
 
-// ─────────────────────────────────────────────
-//  CSR sparse matrix (5-diagonal structure)
-// ─────────────────────────────────────────────
 struct CSR_matrix {
     std::size_t rows, cols;
     std::vector<double>      val;
@@ -30,13 +24,11 @@ struct CSR_matrix {
 
     CSR_matrix() : rows(0), cols(0) {}
 
-    // Build from COO map
     CSR_matrix(const std::map<std::array<std::size_t,2>, double>& A,
                std::size_t nrows, std::size_t ncols)
         : rows(nrows), cols(ncols)
     {
         row_ptr.resize(rows + 1, 0);
-        // count entries per row
         for (auto& [key, v] : A) row_ptr[key[0] + 1]++;
         for (std::size_t i = 1; i <= rows; ++i) row_ptr[i] += row_ptr[i-1];
 
@@ -50,8 +42,6 @@ struct CSR_matrix {
             val[p]     = v;
         }
     }
-
-    // Matrix–vector product  y = A*x
     Vector<double> matvec(const Vector<double>& x) const {
         Vector<double> y(rows, 0.0);
         for (std::size_t i = 0; i < rows; ++i)
@@ -60,10 +50,6 @@ struct CSR_matrix {
         return y;
     }
 };
-
-// ─────────────────────────────────────────────
-//  SLAE container
-// ─────────────────────────────────────────────
 template<typename T>
 struct SLAE {
     CSR_matrix     A;
